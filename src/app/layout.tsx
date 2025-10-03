@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { fontTitulo, fontCuerpo } from "./fonts";
-import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,9 +20,25 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${fontTitulo.variable} ${fontCuerpo.variable}`}
     >
-      <body className={` antialiased`}>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="description" content="ApuDataIT" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon.ico"
+          sizes="128x128"
+        />
+      </head>
+      <body
+        className={`bg-background text-foreground font-cuerpo selection:bg-[#304bd1] selection:text-primary-foreground antialiased`}
+      >
         <noscript>Página realizada por Jhan Gómez P. @jhangmez.</noscript>
-        {children}
+        <Toaster />
+        <Providers>
+          <Toaster />
+          {children}
+        </Providers>
       </body>
     </html>
   );
